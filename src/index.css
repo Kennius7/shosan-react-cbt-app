@@ -1,0 +1,479 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, Poppins;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #030303de;
+  background-color: #dad6e7;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+a:hover {
+  color: #535bf2;
+} */
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 1.8em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 2px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 1s;
+}
+button:hover {
+  border-color: #eec719;
+}
+button:focus,
+button:focus-visible {
+  border-color: #eec719;
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.quizNavButton {
+  background-color: #04384d;
+}
+
+.text-gradient {
+  background: linear-gradient(
+    180.00deg,
+    #f6fafa 0.89%,
+    #d0eff0 17.23%,
+    #7abbe6 42.04%,
+    #5995ee 55.12%,
+    #584edf 71.54%,
+    #1f22c4 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.bg-text-gradient {
+  background: linear-gradient(
+    180.00deg,
+    #f6fafa 0.89%,
+    #d0eff0 17.23%,
+    #7abbe6 42.04%,
+    #5995ee 55.12%,
+    #584edf 71.54%,
+    #1f22c4 100%
+  );
+}
+
+.bg-blue-gradient {
+  background: linear-gradient(
+    157.81deg,
+    #def9fa -43.27%,
+    #bef3f5 -21.24%,
+    #9dedf0 12.19%,
+    #7de7eb 29.82%,
+    #5ce1e6 51.94%,
+    #33bbcf 90.29%
+  );
+}
+
+.bg-black-gradient {
+  background: linear-gradient(
+    144.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
+  );
+}
+
+.bg-black-gradient-2 {
+  background: linear-gradient(
+    -168.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
+  );
+}
+
+.bg-gray-gradient {
+  background: linear-gradient(
+    153.47deg,
+    rgba(255, 255, 255, 0) -341.94%,
+    #14101d 95.11%
+  );
+}
+
+.bg-discount-gradient {
+  background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
+}
+
+.box-shadow {
+  box-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
+}
+
+.sidebar {
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.feature-card:hover {
+  background: var(--black-gradient);
+  box-shadow: var(--card-shadow);
+}
+
+.feature-card {
+  background: var(--white-gradient);
+}
+
+.feature-card2 {
+  background: var(--white-gradient);
+}
+
+.feedback-card2 {
+  background: var(--black-gradient);
+}
+
+.feedback-card3 {
+  background: var(--white-gradient);
+}
+
+/* .feedback-container .feedback-card:last-child {
+  margin-right: 0px;
+} */
+
+.feedback-card {
+  background: transparent;
+}
+
+.feedback-card:hover {
+  background: var(--white-gradient);
+}
+
+.blue__gradient {
+  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
+  filter: blur(123px);
+}
+
+.pink__gradient {
+  background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
+  filter: blur(900px);
+}
+
+.white__gradient {
+  background: rgba(255, 255, 255, 0.6);
+  filter: blur(750px);
+}
+
+.newline {
+  white-space: pre-line;
+}
+
+.del{
+  color: #00040f;
+  color: #010718;
+  color: #00f6ff;
+  color: #ffffffb3;
+  color: #09977c1a;
+}
+
+.navText1{
+  text-shadow: 0 0 7px rgb(42, 16, 185);
+}
+
+.navText2{
+  text-shadow: 0 0 1px rgb(219, 189, 15);
+}
+
+.commentButton {
+  background-color: #0eb5f7;
+}
+
+.commentButton:hover {
+  background-color: #065270;
+}
+
+.commentButton:focus {
+  background-color: #04384d;
+}
+
+.commentButtonText{
+  text-shadow: 0 0 2px rgb(26, 30, 228);
+}
+
+.commentButtonText:hover{
+  text-shadow: 0 0 8px rgb(230, 19, 47);
+}
+
+
+
+/* ********************************************===CONTACT FORM CSS===******************************************/
+
+
+.form__content{
+  display: grid;
+  row-gap: 1.0rem;
+  padding: 4px;
+}
+
+.form__input,
+.form__messageInput,
+.form__submit{
+  border-bottom-color: #1f22c4;
+  border-bottom-width: 1px;
+  outline: none;
+}
+
+.form__box{
+  position: relative;
+  width: 98%;
+  margin: auto;
+}
+
+.form__shadow{
+  border-radius: 4px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #3452b3;
+  opacity: .6;
+  outline: none;
+  border-width: 0;
+}
+
+.form__messageShadow{
+  border-radius: 4px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #3452b3;
+  opacity: .6;
+  outline: none;
+  border-width: 0;
+}
+
+.form__input{
+  border-radius: 4px;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  z-index: 2;
+  transition: transform .5s;
+}
+
+.form__input::placeholder{
+  color: #14101d;
+  padding-left: 5px;
+}
+
+.form__messageInput::placeholder{
+  color: #14101d;
+}
+
+.form__messageInput{
+  border-radius: 4px;
+  position: absolute;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  z-index: 2;
+  transition: transform .5s;
+}
+
+.form__button{
+  position: relative;
+  justify-self: center;
+  align-items: center;
+}
+
+.form__submit{
+  position: absolute;
+  color: white;
+  background-color: #0c1488;
+  cursor: pointer;
+  transition: transform .5s;
+  z-index: 2;
+}
+
+.form__shadow2{
+  position: absolute;
+  background-color: #3452b3;
+  opacity: .6;
+  outline: none;
+  border-width: 0;
+}
+
+.form__submit:focus{
+  position: absolute;
+  transform: translate(-3px, -3px);
+  z-index: 2;
+}
+
+.form__submit:hover{
+  background-color: #3113b6;
+  transition: 1s;
+  transform: translate(-4px, -4px);
+}
+
+.form__input:focus::placeholder{
+  opacity: 0;
+  transition: .5s;
+}
+
+.form__messageInput:focus::placeholder{
+  opacity: 0;
+  transition: .5s;
+}
+
+.form__input:focus,
+.form__input:not(:placeholder-shown).form__input:not(:focus),
+.form__messageInput:focus,
+.form__messageInput:not(:placeholder-shown).form__messageInput:not(:focus){
+  transform: translate(-2px, -2px);
+}
+
+.sent{
+  background-color: #0cb335;
+}
+
+.reject{
+  background-color: #b33b0c;
+}
+
+.default{
+  background-color: #07064e;
+}
+
+.error-default{
+  background-color: #07064e;
+}
+
+
+
+/* *****************************************===END OF CONTACT FORM CSS===*************************************/
+
+
+.editor{
+  color: black;
+  background-color: white;
+}
+
+.blogTextBoxEllipsis{
+  display: -webkit-box;
+  -webkit-line-clamp: 13;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bg-article-black {
+  background-color: rgb(0, 4, 15);
+}
+
+.bg-article-black-gradient {
+  background: linear-gradient(to bottom, rgba(0, 4, 15, 0), rgba(0, 4, 15, 1));
+}
+
+.seeMoreTextShadow{
+  text-shadow: 0 0 10px rgb(22, 8, 145);
+}
+
+.contactUs-diagonal-bg{
+  background: linear-gradient(70.00deg, #00040f, 100ch, white);
+}
+
+.contactUs-diagonal-bg2{
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.contactUs-diagonal-bg2::after{
+  content: "";
+}
+
+.image-diagonal-bg{
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.image-diagonal-bg::after{
+  content: "";
+transform: skewX(0);
+}
+
+
+
+
+
+
+
+/**********************************************END OF MATIC DRIVE CSS FILE******************************************/
+/**********************************************END OF MATIC DRIVE CSS FILE******************************************/
+
+
+
+
+
+
+
+
+
