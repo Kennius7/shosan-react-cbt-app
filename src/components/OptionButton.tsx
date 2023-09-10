@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { examData } from "./examQuestionData";
 
@@ -15,7 +15,6 @@ type Props = {
 }
 
 function OptionButton(props: Props) {
-    const [scoreAdded, setScoreAdded] = useState(false);
     const {  
         setButtonColorA, 
         setButtonColorB, 
@@ -24,6 +23,10 @@ function OptionButton(props: Props) {
         scoreText,
         setScoreText,
         currentQuestion,
+        scoreAdded,
+        setScoreAdded,
+        answered,
+        setAnswered,
     } = useContext(AppContext);
 
     const setButtonColorFunction = () => {
@@ -31,14 +34,16 @@ function OptionButton(props: Props) {
         
         
 
-        if (!scoreAdded && props.optionText === examData[currentQuestion].correctAnswer) {
+        if (!answered && !scoreAdded && props.optionText === examData[currentQuestion].correctAnswer) {
             setScoreText(scoreText + 10);
             setScoreAdded(true);
+            setAnswered(false);
         }
 
-        if (scoreAdded && props.optionText !== examData[currentQuestion].correctAnswer) {
+        if (answered && scoreAdded && props.optionText !== examData[currentQuestion].correctAnswer) {
             setScoreText(scoreText - 10);
             setScoreAdded(false);
+            setAnswered(true);
         }
 
         if (props.buttonA) {
@@ -61,6 +66,10 @@ function OptionButton(props: Props) {
             setButtonColorC(false);
             setButtonColorA(false);
         }
+
+        console.log(`Was the score added? ${scoreAdded}`);
+        console.log(`What is the score? ${scoreText}`);
+        
     }
 
     // useEffect(() => {

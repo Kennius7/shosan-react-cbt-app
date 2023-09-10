@@ -51,7 +51,12 @@ h1 {
 
 h2 {
   font-size: 1.8em;
-  line-height: 1.1;
+  line-height: 1;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 0.8;
 }
 
 button {
@@ -71,6 +76,16 @@ button:focus,
 button:focus-visible {
   border-color: #eec719;
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+input {
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  padding-left: 0.3em;
+}
+
+input::placeholder {
+  padding-left: 0.3em;
 }
 
 .quizNavButton {

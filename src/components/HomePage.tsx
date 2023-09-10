@@ -30,10 +30,6 @@ function HomePage() {
             So think it through thoroughly before clicking the last Next button!
           </div>
 
-          <Button 
-            linkVariable={quizLink} 
-            buttonText="Start Quiz"/>
-
           <div>
             <h6>
               When you're ready to start your exam, click on the 
@@ -44,9 +40,15 @@ function HomePage() {
 
         </div>
 
-        <BackButton
-          linkVariable={backLink}
-          buttonText="Back" />
+        <div className="flex justify-between items-center w-full">
+          <BackButton
+            linkVariable={backLink}
+            buttonText="Back"/>
+
+          <Button 
+            linkVariable={quizLink} 
+            buttonText="Start Quiz"/>
+        </div>
 
       </div>
     </>

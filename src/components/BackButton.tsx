@@ -11,11 +11,12 @@ export interface Props {
 
 
 function BackButton(props: Props) {
-    const { setCurrentQuestion } = useContext(AppContext);
+    const { setCurrentQuestion, setExamTimeLimit } = useContext(AppContext);
     const Navigate = useNavigate();
     
     const buttonLinkFunct = () => {
       setCurrentQuestion(0);
+      setExamTimeLimit(1000);
       Navigate(props.linkVariable);
     }
 

@@ -23,6 +23,10 @@ export const AppContext = createContext<{
     setMinutes: React.Dispatch<React.SetStateAction<number>>, 
     hours: number, 
     setHours: React.Dispatch<React.SetStateAction<number>>,
+    scoreAdded: boolean, 
+    setScoreAdded: React.Dispatch<React.SetStateAction<boolean>>,
+    answered: boolean, 
+    setAnswered: React.Dispatch<React.SetStateAction<boolean>>,
 }>({
     examTimeLimit: 0,
     setExamTimeLimit: function (_value: SetStateAction<number>): void {
@@ -62,6 +66,14 @@ export const AppContext = createContext<{
     },
     hours: 0,
     setHours: function (_value: SetStateAction<number>): void {
+        throw new Error("Function not implemented.");
+    },
+    scoreAdded: false,
+    setScoreAdded: function (_value: SetStateAction<boolean>): void {
+        throw new Error("Function not implemented.");
+    },
+    answered: false,
+    setAnswered: function (_value: SetStateAction<boolean>): void {
         throw new Error("Function not implemented.");
     },
 });

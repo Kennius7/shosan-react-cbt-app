@@ -1,8 +1,12 @@
+import { AppContext } from "../context/AppContext";
 import Button from "./Button"
+import { useContext } from 'react';
 
 
 function ScorePage() {
     const homeLink = "/";
+    const { scoreText } = useContext(AppContext);
+
     const printScore = () => {
         console.log("Print Score");
     }
@@ -22,6 +26,10 @@ function ScorePage() {
                     Your score sheet is presented below. 
                     Click on the Print button below to print your score sheet.
                 </div>
+
+                <h1>
+                    Your score is: {scoreText}
+                </h1>
 
                 <div>
                     <button type="button" onClick={printScore}>PRINT EXAM SCORE</button>

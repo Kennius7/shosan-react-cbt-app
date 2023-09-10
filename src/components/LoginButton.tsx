@@ -4,20 +4,14 @@ import { AppContext } from "../context/AppContext";
 
 
 
-export interface Props {
-  linkVariable: string;
-  buttonText: string;
-}
 
-
-function Button(props: Props) {
-    const { setCurrentQuestion, setExamTimeLimit } = useContext(AppContext);
+function LoginButton() {
+    const { setCurrentQuestion } = useContext(AppContext);
     const Navigate = useNavigate();
     
-    const buttonLinkFunct = () => {
+    const LoginFunct = () => {
       setCurrentQuestion(0);
-      setExamTimeLimit(1000);
-      Navigate(props.linkVariable);
+      Navigate("/home");
     }
 
   return (
@@ -26,12 +20,12 @@ function Button(props: Props) {
             <button 
               type="button" 
               className="bg-primary text-white w-[150px]" 
-              onClick={buttonLinkFunct}>
-                {props.buttonText}
+              onClick={LoginFunct}>
+                Login
             </button>
         </div>
     </>
   )
 }
 
-export default Button
+export default LoginButton

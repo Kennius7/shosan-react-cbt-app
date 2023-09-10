@@ -22,7 +22,12 @@ function App() {
   const [buttonColorD, setButtonColorD] = useState(false);
   const [scoreText, setScoreText] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [scoreAdded, setScoreAdded] = useState(false);
+  const [answered, setAnswered] = useState(false);
 
+  // const scoreTotal = [
+  //   scoreText * (currentQuestion + 1),
+  // ]
 
   useEffect(() => {
     const onScroll = () => {
@@ -48,6 +53,7 @@ function App() {
         examTimeLimit, setExamTimeLimit, buttonColorA, setButtonColorA, buttonColorB, setButtonColorB,
         buttonColorC, setButtonColorC, buttonColorD, setButtonColorD, scoreText, setScoreText, 
         currentQuestion, setCurrentQuestion, seconds, setSeconds, minutes, setMinutes, hours, setHours,
+        scoreAdded, setScoreAdded, answered, setAnswered,
       }}>
         <BrowserRouter>
           <div className={`flex flex-col relative w-full`}>

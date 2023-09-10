@@ -29,10 +29,14 @@ function QuizPage() {
         seconds,
         minutes,
         hours,
+        setAnswered,
     } = useContext(AppContext);
 
     const prevQuestion = () => {
-        
+        setButtonColorA(false);
+        setButtonColorB(false);
+        setButtonColorC(false);
+        setButtonColorD(false);
         if (currentQuestion < 1) {
             Navigate("/home");
         }
@@ -40,7 +44,11 @@ function QuizPage() {
     }
 
     const nextQuestion = () => {
-        
+        setAnswered(true);
+        setButtonColorA(false);
+        setButtonColorB(false);
+        setButtonColorC(false);
+        setButtonColorD(false);
         if (currentQuestion > examData.length - 2) {
             Navigate("/score");
         }
