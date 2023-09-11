@@ -6,6 +6,8 @@ import { examData } from "./examQuestionData";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -41,6 +43,7 @@ function QuizPage() {
             Navigate("/home");
         }
         setCurrentQuestion(currentQuestion - 1);
+        toast("Previous Question", { type: "error" });
     }
 
     const nextQuestion = () => {
@@ -53,6 +56,7 @@ function QuizPage() {
             Navigate("/score");
         }
         setCurrentQuestion(currentQuestion + 1);
+        toast("Next Question", { type: "info" });
     }
 
     return (
