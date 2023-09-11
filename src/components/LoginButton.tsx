@@ -19,7 +19,7 @@ function LoginButton() {
         <div className="mt-4">
             <button 
               type="button" 
-              className="bg-primary text-white w-[150px]" 
+              className="bg-blue-gradient2 text-white w-[150px]" 
               onClick={LoginFunct}>
                 Login
             </button>

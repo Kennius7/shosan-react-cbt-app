@@ -82,10 +82,35 @@ input {
   padding-top: 0.6em;
   padding-bottom: 0.6em;
   padding-left: 0.3em;
+  border-radius: 7px;
 }
 
 input::placeholder {
   padding-left: 0.3em;
+}
+
+.bg-blue-gradient2 {
+  background: linear-gradient(
+    157.81deg,
+    #def9fa -43.27%,
+    #7ad6da -21.24%,
+    #216d91 12.19%,
+    #1376b8 29.82%,
+    #0c3691 51.94%,
+    #031d55 90.29%
+  );
+}
+
+.bg-blue-gradient3 {
+  background: linear-gradient(
+    157.81deg,
+    #0b4275 -43.27%,
+    #296eaf -21.24%,
+    #219182 12.19%,
+    #13b879 29.82%,
+    #0c9169 51.94%,
+    #035547 90.29%
+  );
 }
 
 .quizNavButton {
@@ -258,7 +283,11 @@ input::placeholder {
 }
 
 .navText2{
-  text-shadow: 0 0 1px rgb(219, 189, 15);
+  text-shadow: 0 0 2px rgb(219, 189, 15);
+}
+
+.navText3{
+  text-shadow: 0 0 7px rgb(14, 77, 8);
 }
 
 .commentButton {

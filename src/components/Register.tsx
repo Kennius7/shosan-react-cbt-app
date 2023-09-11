@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/Shosan-Acodemia-Logo-small2.png";
-import LoginButton from "./LoginButton";
+import RegisterButton from "./RegisterButton";
 
 //todo Database for user login will be MongoDB
 //! Database for user login will be MongoDB
@@ -9,7 +9,7 @@ import LoginButton from "./LoginButton";
 // Database for user login will be MongoDB
 
 
-function Login() {
+function Register() {
     const Navigate = useNavigate();
 
     return (
@@ -33,8 +33,8 @@ function Login() {
                         </h3>
                     </div>
 
-                    <div className="font-bold font-poppins text-[30px] my-[50px] text-white navText1">
-                        Login
+                    <div className="font-bold font-poppins text-[30px] my-[50px] text-white navText3">
+                        Sign Up
                     </div>
 
                     <div className="flex justify-center items-center w-full">
@@ -43,6 +43,13 @@ function Login() {
                             name="cbtForm" 
                             className="flex flex-col justify-center items-center w-[30%]">
 
+                            <div className="mb-2 w-full">
+                                <input 
+                                    type="text" 
+                                    placeholder="Full Name" 
+                                    name="fullName" 
+                                    className="w-full text-[16px]"/>
+                            </div>
                             <div className="mb-2 w-full">
                                 <input 
                                     type="email" 
@@ -59,15 +66,15 @@ function Login() {
                             </div>
 
                             <div className="text-[16px]">
-                                Don&apos;t have an account,&nbsp;
-                                <span onClick={()=>Navigate("/register")} 
-                                    className="text-blue-600 font-semibold cursor-pointer">
-                                    sign up here.
+                                Have an account already, then&nbsp;
+                                <span onClick={()=>Navigate("/")} 
+                                    className="text-yellow-800 font-semibold cursor-pointer">
+                                    sign in here.
                                 </span>
                             </div>
 
                             <div className="mt-[20px]">
-                                <LoginButton />
+                                <RegisterButton />
                             </div>
 
                         </form>
@@ -83,4 +90,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Register

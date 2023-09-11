@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import HomePage from "./components/HomePage";
 import QuizPage from "./components/QuizPage";
 import ScorePage from "./components/ScorePage";
+import Register from "./components/Register";
 import ScrollToTop from "./ScrollToTop";
 import { AppContext } from "./context/AppContext";
 
@@ -70,6 +71,7 @@ function App() {
 
             <Routes>
               <Route path="/" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/home" element={<HomePage />} />
               <Route path="/quiz" element={<QuizPage />} />
               <Route path="/score" element={<ScorePage />} />
