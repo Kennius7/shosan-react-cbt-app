@@ -1,5 +1,5 @@
-import BackButton from "./BackButton";
-import Button from "./Button";
+import QuizReturnButton from "./QuizReturnButton";
+import CheckScoreButton from "./CheckScoreButton";
 import OptionButton from "./OptionButton";
 import ExamTimer from "./ExamTimer";
 import { examData } from "./examQuestionData";
@@ -132,11 +132,11 @@ function QuizPage() {
                 </div>
 
                 <div className="flex justify-between items-center w-full">
-                    <BackButton 
+                    <QuizReturnButton 
                         linkVariable={backLink} 
                         buttonText="Back"/>
 
-                    <Button 
+                    <CheckScoreButton 
                         linkVariable={scoreLink} 
                         buttonText="Check Score"/>
                 </div>

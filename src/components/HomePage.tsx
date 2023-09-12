@@ -1,5 +1,5 @@
 import BackButton from "./BackButton";
-import Button from "./Button";
+import StartQuizButton from "./StartQuizButton";
 
 
 function HomePage() {
@@ -8,44 +8,42 @@ function HomePage() {
 
   return (
     <>
-      <div>
+      <div className="flex flex-col justify-center items-center relative w-full h-[100vh]">
 
-        <h1>Hello World</h1>
+        <div className="flex flex-col justify-center items-center">
 
-        <div>
-
-          <div className="text-center text-white italic">
-            <span>NOTE OF WARNING!</span>
-            <br/>
-            <span>
-              PLEASE TAKE NOTE THAT CLICKING ON THE NEXT BUTTON
-              AFTER ANSWERING THE LAST 
-              <span>(Number 10)</span> 
-              QUESTION WILL SIGNAL THE END OF YOUR EXAM!
-            </span> 
-            <br/> 
-            YOU CAN GO BACK TO PREVIOUS QUESTIONS ONLY IF YOU HAVE NOT DONE THE ABOVE. 
-            <br/> 
-            <br/>
-            So think it through thoroughly before clicking the last Next button!
+          <div className="text-[28px] font-poppins text-primary font-semibold">
+            NOTE OF WARNING!
           </div>
 
-          <div>
+          <div className="text-start text-primary italic w-[50%] mt-[50px] text-[22px]">
+
+            <span>
+              PLEASE TAKE NOTE THAT CLICKING ON THE NEXT BUTTON AFTER ANSWERING THE LAST&nbsp; 
+              <span className="text-blue-600">(Number 10)</span> 
+              &nbsp;QUESTION WILL SIGNAL THE END OF YOUR EXAM!
+            </span>
+
+            &nbsp;YOU CAN GO BACK TO PREVIOUS QUESTIONS ONLY IF YOU HAVE NOT DONE THE ABOVE.
+            So think thoroughly before submitting!
+
+          </div>
+
+          <div className="text-start w-[50%] mt-[50px] text-[22px]">
             <h6>
-              When you're ready to start your exam, click on the 
-              <span>START EXAM</span> 
-              Button above. Your exam questions will load after clicking the button.
+              When you're ready to start your exam, click on the Start Quiz
+              Button below right. Your exam questions will load after clicking the button.
             </h6>
           </div>
 
         </div>
 
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between items-center absolute z-1 bottom-2 w-[70%]">
           <BackButton
             linkVariable={backLink}
             buttonText="Back"/>
 
-          <Button 
+          <StartQuizButton 
             linkVariable={quizLink} 
             buttonText="Start Quiz"/>
         </div>

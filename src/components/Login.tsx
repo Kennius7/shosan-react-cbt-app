@@ -27,7 +27,7 @@ function Login() {
                 </div>
 
                 <div className="flex flex-col justify-center items-center w-full absolute z-[2] xs:top-[15%] 
-                    top-[5%]">
+                    top-[8%]">
 
                     <div className="font-poppins flex flex-col justify-center xs:items-center items-start 
                         xs:w-full w-[80%]">

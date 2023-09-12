@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
-// import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import QuizPage from "./components/QuizPage";
 import ScorePage from "./components/ScorePage";
@@ -25,6 +25,7 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [scoreAdded, setScoreAdded] = useState(false);
   const [answered, setAnswered] = useState(false);
+  const [checkQuizPage, setCheckQuizPage] = useState(false);
 
   // const scoreTotal = [
   //   scoreText * (currentQuestion + 1),
@@ -39,12 +40,24 @@ function App() {
       }
     };
 
+    const checkQuizPageFunct = () => {
+      if (checkQuizPage) {
+        console.log("Logged into the Quiz Page");
+        
+      }
+      if (!checkQuizPage) {
+        console.log("Logged out of the Quiz Page");
+        
+      }
+    }
+
     window.addEventListener("scroll", onScroll);
+    checkQuizPageFunct();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  }, []);
+  }, [checkQuizPage]);
 
 
 
@@ -54,17 +67,17 @@ function App() {
         examTimeLimit, setExamTimeLimit, buttonColorA, setButtonColorA, buttonColorB, setButtonColorB,
         buttonColorC, setButtonColorC, buttonColorD, setButtonColorD, scoreText, setScoreText, 
         currentQuestion, setCurrentQuestion, seconds, setSeconds, minutes, setMinutes, hours, setHours,
-        scoreAdded, setScoreAdded, answered, setAnswered,
+        scoreAdded, setScoreAdded, answered, setAnswered, checkQuizPage, setCheckQuizPage
       }}>
         <BrowserRouter>
           <div className={`flex flex-col relative w-full`}>
             <div
               className={`w-full z-[3]
-              ${scrolled
-                  ? "bg-primary fixed duration-1000"
-                  : "bg-transparent absolute duration-1000"
-                }`}>
-              {/* <Navbar /> */}
+                ${scrolled
+                    ? "bg-primary fixed duration-1000"
+                    : "bg-transparent absolute duration-1000"}
+                  ${checkQuizPage ? "hidden" : "block"}`}>
+              <Navbar />
             </div>
 
             <ScrollToTop />

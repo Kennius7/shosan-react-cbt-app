@@ -27,6 +27,8 @@ export const AppContext = createContext<{
     setScoreAdded: React.Dispatch<React.SetStateAction<boolean>>,
     answered: boolean, 
     setAnswered: React.Dispatch<React.SetStateAction<boolean>>,
+    checkQuizPage: boolean, 
+    setCheckQuizPage: React.Dispatch<React.SetStateAction<boolean>>,
 }>({
     examTimeLimit: 0,
     setExamTimeLimit: function (_value: SetStateAction<number>): void {
@@ -74,6 +76,10 @@ export const AppContext = createContext<{
     },
     answered: false,
     setAnswered: function (_value: SetStateAction<boolean>): void {
+        throw new Error("Function not implemented.");
+    },
+    checkQuizPage: false,
+    setCheckQuizPage: function (_value: SetStateAction<boolean>): void {
         throw new Error("Function not implemented.");
     },
 });
