@@ -89,6 +89,11 @@ input::placeholder {
   padding-left: 0.3em;
 }
 
+p > span {
+  color: #0f2174;
+  font-weight: bold;
+}
+
 .bg-blue-gradient2 {
   background: linear-gradient(
     157.81deg,

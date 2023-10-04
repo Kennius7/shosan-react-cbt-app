@@ -3,11 +3,12 @@ import CheckScoreButton from "./CheckScoreButton";
 import OptionButton from "./OptionButton";
 import ExamTimer from "./ExamTimer";
 import { examData } from "./examQuestionData";
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 
 
@@ -17,22 +18,20 @@ function QuizPage() {
     const Navigate = useNavigate();
 
     const { 
-        buttonColorA, 
-        setButtonColorA, 
-        buttonColorB, 
-        setButtonColorB, 
-        buttonColorC, 
-        setButtonColorC, 
-        buttonColorD, 
-        setButtonColorD,
-        scoreText,
-        currentQuestion,
-        setCurrentQuestion,
-        seconds,
-        minutes,
-        hours,
-        setAnswered,
+        buttonColorA, setButtonColorA, buttonColorB, setButtonColorB, buttonColorC, setButtonColorC, 
+        buttonColorD, setButtonColorD, scoreText, currentQuestion, setCurrentQuestion, seconds,
+        minutes, hours, setAnswered, examUtils, setExamUtils, examOptionsData
     } = useContext(AppContext);
+
+    useEffect(() => {
+        setExamUtils([examOptionsData]);
+        console.log(examUtils);
+        console.log(currentQuestion);
+        setButtonColorA(false);
+        setButtonColorB(false);
+        setButtonColorC(false);
+        setButtonColorD(false);
+        }, [])
 
     const prevQuestion = () => {
         setButtonColorA(false);
@@ -43,10 +42,12 @@ function QuizPage() {
             Navigate("/home");
         }
         setCurrentQuestion(currentQuestion - 1);
-        toast("Previous Question", { type: "error" });
+        toast("Previous Question", { type: "success" });
     }
 
     const nextQuestion = () => {
+        console.log(`Next Button's current question: ${currentQuestion}`);
+        console.log(`Next Button's exam utils: ${examUtils}`);
         setAnswered(true);
         setButtonColorA(false);
         setButtonColorB(false);
@@ -55,7 +56,15 @@ function QuizPage() {
         if (currentQuestion > examData.length - 2) {
             Navigate("/score");
         }
+        if (!examUtils[currentQuestion].option) {
+            toast("Please choose an answer!", {type: "error"});
+            return
+        }
+        console.log(examUtils[currentQuestion].answer);
         setCurrentQuestion(currentQuestion + 1);
+        
+        
+        
         toast("Next Question", { type: "info" });
     }
 
@@ -103,6 +112,15 @@ function QuizPage() {
                             optionText={examData[currentQuestion]?.optionD} buttonD />
                     </div>
 
+                    <div className="w-[40%]">
+                        <p className="font-poppins text-[14px] italic tracking-tight w-full">
+                            You have
+                            &nbsp;<span>{hours}</span>&nbsp;hours, 
+                            &nbsp;<span>{minutes}</span>&nbsp;minutes and 
+                            &nbsp;<span>{seconds}</span>&nbsp;seconds left.
+                        </p>
+                    </div>
+
                     <div className="flex justify-around items-center mt-10 w-[40%]">
                         <div className="w-[32%]">
                             <button 
@@ -121,13 +139,6 @@ function QuizPage() {
                                 className="quizNavButton w-full text-blue-400" 
                                 onClick={nextQuestion}>Next</button>
                         </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div className="">
-                        You have {hours} hours, {minutes} minutes and {seconds} seconds left 
-                        before this test is terminated
                     </div>
                 </div>
 

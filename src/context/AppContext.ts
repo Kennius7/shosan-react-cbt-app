@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { SetStateAction, createContext } from "react";
 
+type examUtilTypes = {
+    id?: number;
+    answer?: string;
+    option?: boolean;
+  }
 
-export const AppContext = createContext<{
+type appContextTypes = {
     examTimeLimit: number, 
     setExamTimeLimit: React.Dispatch<React.SetStateAction<number>>, 
     buttonColorA: boolean, 
@@ -29,7 +34,12 @@ export const AppContext = createContext<{
     setAnswered: React.Dispatch<React.SetStateAction<boolean>>,
     checkQuizPage: boolean, 
     setCheckQuizPage: React.Dispatch<React.SetStateAction<boolean>>,
-}>({
+    examUtils: examUtilTypes[], 
+    setExamUtils: React.Dispatch<React.SetStateAction<Array<examUtilTypes>>>,
+    examOptionsData: object,
+}
+
+export const AppContext = createContext<appContextTypes>({
     examTimeLimit: 0,
     setExamTimeLimit: function (_value: SetStateAction<number>): void {
         throw new Error("Function not implemented.");
@@ -82,4 +92,11 @@ export const AppContext = createContext<{
     setCheckQuizPage: function (_value: SetStateAction<boolean>): void {
         throw new Error("Function not implemented.");
     },
+    examUtils: [],
+    setExamUtils: function (_value: SetStateAction<Array<examUtilTypes>>): void {
+        throw new Error("Function not implemented.");
+    },
+    examOptionsData: {answer: "", option: false}
 });
+
+

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import { examData } from "./examQuestionData";
+import { examData } from './examQuestionData';
 
 
 
@@ -12,6 +12,7 @@ type Props = {
     buttonB?: boolean,
     buttonC?: boolean,
     buttonD?: boolean,
+    optionSelect?: string,
 }
 
 function OptionButton(props: Props) {
@@ -20,82 +21,85 @@ function OptionButton(props: Props) {
         setButtonColorB, 
         setButtonColorC, 
         setButtonColorD,
-        scoreText,
-        setScoreText,
         currentQuestion,
-        scoreAdded,
-        setScoreAdded,
-        answered,
-        setAnswered,
+        examUtils, 
+        setExamUtils,
     } = useContext(AppContext);
+
+
+    const optionMapperA = () =>{
+        examUtils.map((utils, id)=>{
+            if (id === utils.id) {
+                return setExamUtils([{id: currentQuestion + 1, answer: examData[currentQuestion].optionA, option: true}]);
+            } else {
+                return utils;
+            }
+        });
+    }
+    const optionMapperB = () =>{
+        examUtils.map((utils, id)=>{
+            if (id === utils.id) {
+                return setExamUtils([{id: currentQuestion + 1, answer: examData[currentQuestion].optionB, option: true}]);
+            } else {
+                return utils;
+            }
+        });
+    }
+    const optionMapperC = () =>{
+        examUtils.map((utils, id)=>{
+            if (id === utils.id) {
+                return setExamUtils([{id: currentQuestion + 1, answer: examData[currentQuestion].optionC, option: true}]);
+            } else {
+                return utils;
+            }
+        });
+    }
+    const optionMapperD = () =>{
+        examUtils.map((utils, id)=>{
+            if (id === utils.id) {
+                return setExamUtils([{id: currentQuestion + 1, answer: examData[currentQuestion].optionD, option: true}]);
+            } else {
+                return utils;
+            }
+        });
+    }
+
 
     const setButtonColorFunction = () => {
         props.setButtonColor(!props.buttonColor);
-        
-        
-
-        if (!answered && !scoreAdded && props.optionText === examData[currentQuestion].correctAnswer) {
-            setScoreText(scoreText + 10);
-            setScoreAdded(true);
-            setAnswered(false);
-        }
-
-        if (answered && scoreAdded && props.optionText !== examData[currentQuestion].correctAnswer) {
-            setScoreText(scoreText - 10);
-            setScoreAdded(false);
-            setAnswered(true);
-        }
 
         if (props.buttonA) {
+            optionMapperA();
+            console.log(`Option Button's exam utils: ${examUtils}`);
             setButtonColorB(false);
             setButtonColorC(false);
             setButtonColorD(false);
         }
         if (props.buttonB) {
+            optionMapperB();
+            console.log(`Option Button's exam utils: ${examUtils}`);
             setButtonColorA(false);
             setButtonColorC(false);
             setButtonColorD(false);
         }
         if (props.buttonC) {
+            optionMapperC();
+            console.log(`Option Button's exam utils: ${examUtils}`);
             setButtonColorB(false);
             setButtonColorA(false);
             setButtonColorD(false);
         }
         if (props.buttonD) {
+            optionMapperD();
+            console.log(`Option Button's exam utils: ${examUtils}`);
             setButtonColorB(false);
             setButtonColorC(false);
             setButtonColorA(false);
         }
 
-        console.log(`Was the score added? ${scoreAdded}`);
-        console.log(`What is the score? ${scoreText}`);
-        
+        console.log(`What option was selected?: ${examUtils[currentQuestion].answer}`);
+
     }
-
-    // useEffect(() => {
-    //     if (props.buttonColor === buttonColorA) {
-    //         setButtonColorB(false);
-    //         setButtonColorC(false);
-    //         setButtonColorD(false);
-    //     }
-    //     if (props.buttonColor === buttonColorB) {
-    //         setButtonColorA(false);
-    //         setButtonColorC(false);
-    //         setButtonColorD(false);
-    //     }
-    //     if (props.buttonColor === buttonColorC) {
-    //         setButtonColorB(false);
-    //         setButtonColorA(false);
-    //         setButtonColorD(false);
-    //     }
-    //     if (props.buttonColor === buttonColorD) {
-    //         setButtonColorB(false);
-    //         setButtonColorC(false);
-    //         setButtonColorA(false);
-    //     }
-    
-    // }, [buttonColorA, buttonColorB, buttonColorC, buttonColorD])
-
 
 
   return (

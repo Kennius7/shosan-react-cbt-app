@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
@@ -9,6 +9,13 @@ import Register from "./components/Register";
 import ScrollToTop from "./ScrollToTop";
 import { AppContext } from "./context/AppContext";
 
+
+
+type examUtilTypes = {
+  id?: number;
+  answer?: string;
+  option?: boolean;
+}
 
 
 function App() {
@@ -26,10 +33,10 @@ function App() {
   const [scoreAdded, setScoreAdded] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [checkQuizPage, setCheckQuizPage] = useState(false);
+  const examOptionsData: object = {id: 0, answer: "", option: false};
+  const [examUtils, setExamUtils] = React.useState<Array<examUtilTypes>>([examOptionsData]);
 
-  // const scoreTotal = [
-  //   scoreText * (currentQuestion + 1),
-  // ]
+
 
   useEffect(() => {
     const onScroll = () => {
@@ -67,7 +74,8 @@ function App() {
         examTimeLimit, setExamTimeLimit, buttonColorA, setButtonColorA, buttonColorB, setButtonColorB,
         buttonColorC, setButtonColorC, buttonColorD, setButtonColorD, scoreText, setScoreText, 
         currentQuestion, setCurrentQuestion, seconds, setSeconds, minutes, setMinutes, hours, setHours,
-        scoreAdded, setScoreAdded, answered, setAnswered, checkQuizPage, setCheckQuizPage
+        scoreAdded, setScoreAdded, answered, setAnswered, checkQuizPage, setCheckQuizPage, examUtils, 
+        setExamUtils, examOptionsData
       }}>
         <BrowserRouter>
           <div className={`flex flex-col relative w-full`}>
