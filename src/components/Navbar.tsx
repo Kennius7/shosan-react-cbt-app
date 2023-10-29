@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { signOut } from "firebase/auth";
 import logo from "../assets/Shosan-Acodemia-Logo-small2.png";
 // import { NavContext } from '../context/NavContext';
 
 
+
 function Navbar() {
     const [scrolled, setScrolled] = useState(false);
+    const location = useLocation();
     // const { navLinks, active, setActive, toggle, setToggle, blogAdminUid, auth } = useContext(NavContext);
     // const [currentlyLoggedInUser] = useAuthState(auth);
     // const [user] = useAuthState(auth);
@@ -62,7 +64,8 @@ function Navbar() {
 
     return (
         <>
-            <nav className={`w-full flex justify-between items-center`}>
+            <nav className={`w-full flex justify-between items-center 
+                ${location.pathname === "/quiz" ? "hidden" : "block"}`}>
 
                 <div className="flex justify-start items-center md:w-[30%] sm:w-[35%] xs:w-[40%] w-[150px]">
 

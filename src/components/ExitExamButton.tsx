@@ -1,16 +1,16 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
 import { AppContext } from "../context/AppContext";
 
 
 
 export interface Props {
-  linkVariable: number;
+  linkVariable: string;
   buttonText: string;
 }
 
 
-function BackButton(props: Props) {
+function ExitExamButton(props: Props) {
     const { setCurrentQuestion, setExamTimeLimit, allottedExamTime } = useContext(AppContext);
     const Navigate = useNavigate();
     
@@ -22,10 +22,10 @@ function BackButton(props: Props) {
 
   return (
     <>
-        <div className="mt-4">
+        <div className="flex justify-center items-center w-full mt-4">
             <button 
               type="button" 
-              className="bg-primary text-white w-[150px]" 
+              className="bg-primary text-white w-[30%]" 
               onClick={buttonLinkFunct}>
                 {props.buttonText}
             </button>
@@ -34,4 +34,4 @@ function BackButton(props: Props) {
   )
 }
 
-export default BackButton
+export default ExitExamButton

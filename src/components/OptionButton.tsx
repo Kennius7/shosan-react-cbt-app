@@ -17,51 +17,66 @@ type Props = {
 
 function OptionButton(props: Props) {
     const {  
-        setButtonColorA, 
-        setButtonColorB, 
-        setButtonColorC, 
-        setButtonColorD,
-        currentQuestion,
-        examUtils, 
-        setExamUtils,
+        setButtonColorA, setButtonColorB, setButtonColorC, setButtonColorD,
+        currentQuestion, scoreDataArray, setScoreDataArray, setAnswered, answered
     } = useContext(AppContext);
 
 
+    const removeLastArrayEntry = () => {
+        const newArray = [...scoreDataArray];
+        newArray.pop();
+        setScoreDataArray(newArray);
+    }
+
+    const scoreUpdaterA = () => {
+        if (examData[currentQuestion].optionA === examData[currentQuestion].correctAnswer) {
+            setScoreDataArray([...scoreDataArray, 10])
+        } else { setScoreDataArray([...scoreDataArray, 0]) }
+        setAnswered(true);
+    }
+
+    const scoreUpdaterB = () => {
+        if (examData[currentQuestion].optionB === examData[currentQuestion].correctAnswer) {
+            setScoreDataArray([...scoreDataArray, 10])
+        } else { setScoreDataArray([...scoreDataArray, 0]) }
+        setAnswered(true);
+    }
+
+    const scoreUpdaterC = () => {
+        if (examData[currentQuestion].optionC === examData[currentQuestion].correctAnswer) {
+            setScoreDataArray([...scoreDataArray, 10])
+        } else { setScoreDataArray([...scoreDataArray, 0]) }
+        setAnswered(true);
+    }
+
+    const scoreUpdaterD = () => {
+        if (examData[currentQuestion].optionD === examData[currentQuestion].correctAnswer) {
+            setScoreDataArray([...scoreDataArray, 10])
+        } else { setScoreDataArray([...scoreDataArray, 0]) }
+        setAnswered(true);
+    }
+
+
+
     const optionMapperA = () =>{
-        examUtils.map((utils, id)=>{
-            if (id === utils.id) {
-                return setExamUtils([{id: currentQuestion + 1, answer: examData[currentQuestion].optionA, option: true}]);
-            } else {
-                return utils;
-            }
-        });
+        !answered 
+            ? scoreUpdaterA() 
+            : removeLastArrayEntry(); scoreUpdaterA();
     }
     const optionMapperB = () =>{
-        examUtils.map((utils, id)=>{
-            if (id === utils.id) {
-                return setExamUtils([{id: currentQuestion + 1, answer: examData[currentQuestion].optionB, option: true}]);
-            } else {
-                return utils;
-            }
-        });
+        !answered 
+            ? scoreUpdaterB() 
+            : removeLastArrayEntry(); scoreUpdaterB();
     }
     const optionMapperC = () =>{
-        examUtils.map((utils, id)=>{
-            if (id === utils.id) {
-                return setExamUtils([{id: currentQuestion + 1, answer: examData[currentQuestion].optionC, option: true}]);
-            } else {
-                return utils;
-            }
-        });
+        !answered 
+            ? scoreUpdaterC() 
+            : removeLastArrayEntry(); scoreUpdaterC();
     }
     const optionMapperD = () =>{
-        examUtils.map((utils, id)=>{
-            if (id === utils.id) {
-                return setExamUtils([{id: currentQuestion + 1, answer: examData[currentQuestion].optionD, option: true}]);
-            } else {
-                return utils;
-            }
-        });
+        !answered 
+            ? scoreUpdaterD() 
+            : removeLastArrayEntry(); scoreUpdaterD();
     }
 
 
@@ -70,34 +85,28 @@ function OptionButton(props: Props) {
 
         if (props.buttonA) {
             optionMapperA();
-            console.log(`Option Button's exam utils: ${examUtils}`);
             setButtonColorB(false);
             setButtonColorC(false);
             setButtonColorD(false);
         }
         if (props.buttonB) {
             optionMapperB();
-            console.log(`Option Button's exam utils: ${examUtils}`);
             setButtonColorA(false);
             setButtonColorC(false);
             setButtonColorD(false);
         }
         if (props.buttonC) {
             optionMapperC();
-            console.log(`Option Button's exam utils: ${examUtils}`);
             setButtonColorB(false);
             setButtonColorA(false);
             setButtonColorD(false);
         }
         if (props.buttonD) {
             optionMapperD();
-            console.log(`Option Button's exam utils: ${examUtils}`);
             setButtonColorB(false);
             setButtonColorC(false);
             setButtonColorA(false);
         }
-
-        console.log(`What option was selected?: ${examUtils[currentQuestion].answer}`);
 
     }
 

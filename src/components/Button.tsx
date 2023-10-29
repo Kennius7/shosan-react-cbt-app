@@ -11,12 +11,12 @@ export interface Props {
 
 
 function Button(props: Props) {
-    const { setCurrentQuestion, setExamTimeLimit } = useContext(AppContext);
+    const { setCurrentQuestion, setExamTimeLimit, allottedExamTime } = useContext(AppContext);
     const Navigate = useNavigate();
     
     const buttonLinkFunct = () => {
       setCurrentQuestion(0);
-      setExamTimeLimit(1000);
+      setExamTimeLimit(allottedExamTime);
       Navigate(props.linkVariable);
     }
 

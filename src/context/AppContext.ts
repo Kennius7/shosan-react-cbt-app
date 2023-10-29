@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { SetStateAction, createContext } from "react";
 
-type examUtilTypes = {
-    id?: number;
-    answer?: string;
-    option?: boolean;
-  }
+
 
 type appContextTypes = {
     examTimeLimit: number, 
+    allottedExamTime: number,
     setExamTimeLimit: React.Dispatch<React.SetStateAction<number>>, 
     buttonColorA: boolean, 
     setButtonColorA: React.Dispatch<React.SetStateAction<boolean>>, 
@@ -28,19 +25,17 @@ type appContextTypes = {
     setMinutes: React.Dispatch<React.SetStateAction<number>>, 
     hours: number, 
     setHours: React.Dispatch<React.SetStateAction<number>>,
-    scoreAdded: boolean, 
-    setScoreAdded: React.Dispatch<React.SetStateAction<boolean>>,
     answered: boolean, 
     setAnswered: React.Dispatch<React.SetStateAction<boolean>>,
     checkQuizPage: boolean, 
     setCheckQuizPage: React.Dispatch<React.SetStateAction<boolean>>,
-    examUtils: examUtilTypes[], 
-    setExamUtils: React.Dispatch<React.SetStateAction<Array<examUtilTypes>>>,
-    examOptionsData: object,
+    scoreDataArray: number[], 
+    setScoreDataArray: React.Dispatch<React.SetStateAction<Array<number>>>,
 }
 
 export const AppContext = createContext<appContextTypes>({
     examTimeLimit: 0,
+    allottedExamTime: 0,
     setExamTimeLimit: function (_value: SetStateAction<number>): void {
         throw new Error("Function not implemented.");
     },
@@ -80,10 +75,6 @@ export const AppContext = createContext<appContextTypes>({
     setHours: function (_value: SetStateAction<number>): void {
         throw new Error("Function not implemented.");
     },
-    scoreAdded: false,
-    setScoreAdded: function (_value: SetStateAction<boolean>): void {
-        throw new Error("Function not implemented.");
-    },
     answered: false,
     setAnswered: function (_value: SetStateAction<boolean>): void {
         throw new Error("Function not implemented.");
@@ -92,11 +83,10 @@ export const AppContext = createContext<appContextTypes>({
     setCheckQuizPage: function (_value: SetStateAction<boolean>): void {
         throw new Error("Function not implemented.");
     },
-    examUtils: [],
-    setExamUtils: function (_value: SetStateAction<Array<examUtilTypes>>): void {
+    scoreDataArray: [],
+    setScoreDataArray: function (_value: SetStateAction<Array<number>>): void {
         throw new Error("Function not implemented.");
     },
-    examOptionsData: {answer: "", option: false}
 });
 
 

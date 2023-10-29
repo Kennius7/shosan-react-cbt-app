@@ -11,30 +11,33 @@ import { AppContext } from "./context/AppContext";
 
 
 
-type examUtilTypes = {
-  id?: number;
-  answer?: string;
-  option?: boolean;
-}
+// type examUtilTypes = {
+//   id?: number;
+//   answer?: string;
+//   option?: boolean;
+// }
 
 
 function App() {
+  const allottedExamTime = 1200;
+
   const [scrolled, setScrolled] = useState(false);
-  const [examTimeLimit, setExamTimeLimit] = useState(1000);
+  const [examTimeLimit, setExamTimeLimit] = useState(allottedExamTime);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
+
   const [buttonColorA, setButtonColorA] = useState(false);
   const [buttonColorB, setButtonColorB] = useState(false);
   const [buttonColorC, setButtonColorC] = useState(false);
   const [buttonColorD, setButtonColorD] = useState(false);
+
   const [scoreText, setScoreText] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [scoreAdded, setScoreAdded] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [checkQuizPage, setCheckQuizPage] = useState(false);
-  const examOptionsData: object = {id: 0, answer: "", option: false};
-  const [examUtils, setExamUtils] = React.useState<Array<examUtilTypes>>([examOptionsData]);
+
+  const [scoreDataArray, setScoreDataArray] = React.useState<Array<number>>([]);
 
 
 
@@ -73,18 +76,16 @@ function App() {
       <AppContext.Provider value={{ 
         examTimeLimit, setExamTimeLimit, buttonColorA, setButtonColorA, buttonColorB, setButtonColorB,
         buttonColorC, setButtonColorC, buttonColorD, setButtonColorD, scoreText, setScoreText, 
-        currentQuestion, setCurrentQuestion, seconds, setSeconds, minutes, setMinutes, hours, setHours,
-        scoreAdded, setScoreAdded, answered, setAnswered, checkQuizPage, setCheckQuizPage, examUtils, 
-        setExamUtils, examOptionsData
+        currentQuestion, setCurrentQuestion, seconds, setSeconds, minutes, setMinutes, hours, setHours, 
+        answered, setAnswered, checkQuizPage, setCheckQuizPage, allottedExamTime, scoreDataArray, 
+        setScoreDataArray
       }}>
         <BrowserRouter>
           <div className={`flex flex-col relative w-full`}>
-            <div
-              className={`w-full z-[3]
-                ${scrolled
-                    ? "bg-primary fixed duration-1000"
-                    : "bg-transparent absolute duration-1000"}
-                  ${checkQuizPage ? "hidden" : "block"}`}>
+            <div className={`w-full z-[3] ${scrolled
+                ? "bg-primary fixed duration-1000"
+                : "bg-transparent absolute duration-1000"}
+                ${checkQuizPage ? "hidden" : "block"}`}>
               <Navbar />
             </div>
 

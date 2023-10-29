@@ -19,19 +19,26 @@ function QuizPage() {
 
     const { 
         buttonColorA, setButtonColorA, buttonColorB, setButtonColorB, buttonColorC, setButtonColorC, 
-        buttonColorD, setButtonColorD, scoreText, currentQuestion, setCurrentQuestion, seconds,
-        minutes, hours, setAnswered, examUtils, setExamUtils, examOptionsData
+        buttonColorD, setButtonColorD, scoreText, setScoreText, currentQuestion, setCurrentQuestion, seconds,
+        minutes, hours, setAnswered, scoreDataArray, answered
     } = useContext(AppContext);
 
     useEffect(() => {
-        setExamUtils([examOptionsData]);
-        console.log(examUtils);
         console.log(currentQuestion);
         setButtonColorA(false);
         setButtonColorB(false);
         setButtonColorC(false);
         setButtonColorD(false);
-        }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const sumArrayItems = (array: Array<number>) => {
+        if (!Array.isArray(array) || array.length === 0) {
+            return 7;
+        }
+
+        return array.reduce((a, b) => a + b, 0);
+    }
 
     const prevQuestion = () => {
         setButtonColorA(false);
@@ -46,26 +53,27 @@ function QuizPage() {
     }
 
     const nextQuestion = () => {
+        if (currentQuestion > examData.length - 2) {
+            Navigate("/score");
+        }
+        if (!answered) {
+            toast("Please choose an answer!", {type: "error"});
+            return
+        }
+
         console.log(`Next Button's current question: ${currentQuestion}`);
-        console.log(`Next Button's exam utils: ${examUtils}`);
-        setAnswered(true);
         setButtonColorA(false);
         setButtonColorB(false);
         setButtonColorC(false);
         setButtonColorD(false);
-        if (currentQuestion > examData.length - 2) {
-            Navigate("/score");
-        }
-        if (!examUtils[currentQuestion].option) {
-            toast("Please choose an answer!", {type: "error"});
-            return
-        }
-        console.log(examUtils[currentQuestion].answer);
+        setScoreText(sumArrayItems(scoreDataArray));
         setCurrentQuestion(currentQuestion + 1);
-        
-        
-        
+        setAnswered(false);
         toast("Next Question", { type: "info" });
+    }
+
+    const handleSubmit = () => {
+        Navigate("/score");
     }
 
     return (
@@ -128,9 +136,11 @@ function QuizPage() {
                                 className="quizNavButton w-full text-red-400"
                                 onClick={prevQuestion}>Previous</button>
                         </div>
-                        <div className="w-[32%]">
+                        <div className={`w-[32%] ${currentQuestion === examData.length - 1 
+                                ? "visible" : "invisible"}`}>
                             <button 
                                 type="button"
+                                onClick={handleSubmit}
                                 className="quizNavButton w-full text-green-500">Submit</button>
                         </div>
                         <div className="w-[32%]">

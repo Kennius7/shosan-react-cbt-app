@@ -11,13 +11,16 @@ export interface Props {
 
 
 function StartQuizButton(props: Props) {
-    const { setCurrentQuestion, setExamTimeLimit, setCheckQuizPage } = useContext(AppContext);
+    const { 
+      setCurrentQuestion, setExamTimeLimit, setCheckQuizPage, allottedExamTime, setScoreText 
+    } = useContext(AppContext);
     const Navigate = useNavigate();
     
     const buttonLinkFunct = () => {
       setCurrentQuestion(0);
       setCheckQuizPage(true);
-      setExamTimeLimit(1000);
+      setExamTimeLimit(allottedExamTime);
+      setScoreText(0);
       Navigate(props.linkVariable);
     }
 

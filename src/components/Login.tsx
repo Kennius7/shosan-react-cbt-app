@@ -33,7 +33,7 @@ function Login() {
                         xs:w-full w-[80%]">
                         <h1 className="sm:text-[45px] xxs:text-[30px] text-[25px] font-bold xs:text-center 
                             text-start tracking-tight">
-                            Shosan Computer <br className="xs:hidden block"/> Based Test
+                            Computer <br className="xs:hidden block"/> Based Test
                         </h1>
                         <h3 className="sm:text-[26px] xs:text-[20px] xxs:text-[22px] text-[20px] font-semibold 
                             xs:text-center text-start xs:tracking-tight tracking-normal xs:leading-none 

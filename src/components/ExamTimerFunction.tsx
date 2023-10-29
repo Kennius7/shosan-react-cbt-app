@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 function ExamTimerFunction() {
     const { 
-        examTimeLimit, setExamTimeLimit, seconds, setSeconds, minutes, setMinutes, hours, setHours, 
+        examTimeLimit, setExamTimeLimit, seconds, setSeconds, minutes, 
+        setMinutes, hours, setHours, allottedExamTime
     } = useContext(AppContext);
     const [moreThanNineSeconds, setMoreThanNineSeconds] = useState(false);
     const [moreThanNineMinutes, setMoreThanNineMinutes] = useState(false);
@@ -36,14 +37,15 @@ function ExamTimerFunction() {
         }
         if (examTimeLimit === 0) {
             Navigate("/score");
-            setExamTimeLimit(1000);
+            setExamTimeLimit(allottedExamTime);
         }
-    
+
         return () => {
             setTimeout(() => {
                 clearInterval(setExamTimerInterval);
             }, 500);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [examTimeLimit])
 
 
