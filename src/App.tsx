@@ -11,6 +11,7 @@ import { AppContext } from "./context/AppContext";
 
 
 
+
 function App() {
   const allottedExamTime = 1200;
 
