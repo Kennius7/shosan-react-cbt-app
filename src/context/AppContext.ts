@@ -27,8 +27,6 @@ type appContextTypes = {
     setHours: React.Dispatch<React.SetStateAction<number>>,
     answered: boolean, 
     setAnswered: React.Dispatch<React.SetStateAction<boolean>>,
-    checkQuizPage: boolean, 
-    setCheckQuizPage: React.Dispatch<React.SetStateAction<boolean>>,
     scoreDataArray: number[], 
     setScoreDataArray: React.Dispatch<React.SetStateAction<Array<number>>>,
 }
@@ -77,10 +75,6 @@ export const AppContext = createContext<appContextTypes>({
     },
     answered: false,
     setAnswered: function (_value: SetStateAction<boolean>): void {
-        throw new Error("Function not implemented.");
-    },
-    checkQuizPage: false,
-    setCheckQuizPage: function (_value: SetStateAction<boolean>): void {
         throw new Error("Function not implemented.");
     },
     scoreDataArray: [],

@@ -12,7 +12,6 @@ type Props = {
     buttonB?: boolean,
     buttonC?: boolean,
     buttonD?: boolean,
-    optionSelect?: string,
 }
 
 function OptionButton(props: Props) {
@@ -22,61 +21,85 @@ function OptionButton(props: Props) {
     } = useContext(AppContext);
 
 
-    const removeLastArrayEntry = () => {
-        const newArray = [...scoreDataArray];
-        newArray.pop();
-        setScoreDataArray(newArray);
-    }
-
     const scoreUpdaterA = () => {
-        if (examData[currentQuestion].optionA === examData[currentQuestion].correctAnswer) {
-            setScoreDataArray([...scoreDataArray, 10])
-        } else { setScoreDataArray([...scoreDataArray, 0]) }
-        setAnswered(true);
+        if (examData[currentQuestion].optionA === examData[currentQuestion].correctAnswer && !answered) {
+            setScoreDataArray([...scoreDataArray, 10]);
+            setAnswered(true);
+        }
+        if (examData[currentQuestion].optionA !== examData[currentQuestion].correctAnswer && !answered) {
+            setScoreDataArray([...scoreDataArray, 0]);
+            setAnswered(true);
+        }
+        if (examData[currentQuestion].optionA !== examData[currentQuestion].correctAnswer && answered) {
+            const newArray = [...scoreDataArray];
+            newArray[currentQuestion] = 0;
+            setScoreDataArray(newArray);
+        }
+        if (examData[currentQuestion].optionA === examData[currentQuestion].correctAnswer && answered) {
+            const newArray = [...scoreDataArray];
+            newArray[currentQuestion] = 10;
+            setScoreDataArray(newArray);
+        }
     }
-
     const scoreUpdaterB = () => {
-        if (examData[currentQuestion].optionB === examData[currentQuestion].correctAnswer) {
-            setScoreDataArray([...scoreDataArray, 10])
-        } else { setScoreDataArray([...scoreDataArray, 0]) }
-        setAnswered(true);
+        if (examData[currentQuestion].optionB === examData[currentQuestion].correctAnswer && !answered) {
+            setScoreDataArray([...scoreDataArray, 10]);
+            setAnswered(true);
+        }
+        if (examData[currentQuestion].optionB !== examData[currentQuestion].correctAnswer && !answered) {
+            setScoreDataArray([...scoreDataArray, 0]);
+            setAnswered(true);
+        }
+        if (examData[currentQuestion].optionB !== examData[currentQuestion].correctAnswer && answered) {
+            const newArray = [...scoreDataArray];
+            newArray[currentQuestion] = 0;
+            setScoreDataArray(newArray);
+        }
+        if (examData[currentQuestion].optionB === examData[currentQuestion].correctAnswer && answered) {
+            const newArray = [...scoreDataArray];
+            newArray[currentQuestion] = 10;
+            setScoreDataArray(newArray);
+        }
     }
-
     const scoreUpdaterC = () => {
-        if (examData[currentQuestion].optionC === examData[currentQuestion].correctAnswer) {
-            setScoreDataArray([...scoreDataArray, 10])
-        } else { setScoreDataArray([...scoreDataArray, 0]) }
-        setAnswered(true);
+        if (examData[currentQuestion].optionC === examData[currentQuestion].correctAnswer && !answered) {
+            setScoreDataArray([...scoreDataArray, 10]);
+            setAnswered(true);
+        }
+        if (examData[currentQuestion].optionC !== examData[currentQuestion].correctAnswer && !answered) {
+            setScoreDataArray([...scoreDataArray, 0]);
+            setAnswered(true);
+        }
+        if (examData[currentQuestion].optionC !== examData[currentQuestion].correctAnswer && answered) {
+            const newArray = [...scoreDataArray];
+            newArray[currentQuestion] = 0;
+            setScoreDataArray(newArray);
+        }
+        if (examData[currentQuestion].optionC === examData[currentQuestion].correctAnswer && answered) {
+            const newArray = [...scoreDataArray];
+            newArray[currentQuestion] = 10;
+            setScoreDataArray(newArray);
+        }
     }
-
     const scoreUpdaterD = () => {
-        if (examData[currentQuestion].optionD === examData[currentQuestion].correctAnswer) {
-            setScoreDataArray([...scoreDataArray, 10])
-        } else { setScoreDataArray([...scoreDataArray, 0]) }
-        setAnswered(true);
-    }
-
-
-
-    const optionMapperA = () =>{
-        !answered 
-            ? scoreUpdaterA() 
-            : removeLastArrayEntry(); scoreUpdaterA();
-    }
-    const optionMapperB = () =>{
-        !answered 
-            ? scoreUpdaterB() 
-            : removeLastArrayEntry(); scoreUpdaterB();
-    }
-    const optionMapperC = () =>{
-        !answered 
-            ? scoreUpdaterC() 
-            : removeLastArrayEntry(); scoreUpdaterC();
-    }
-    const optionMapperD = () =>{
-        !answered 
-            ? scoreUpdaterD() 
-            : removeLastArrayEntry(); scoreUpdaterD();
+        if (examData[currentQuestion].optionD === examData[currentQuestion].correctAnswer && !answered) {
+            setScoreDataArray([...scoreDataArray, 10]);
+            setAnswered(true);
+        }
+        if (examData[currentQuestion].optionD !== examData[currentQuestion].correctAnswer && !answered) {
+            setScoreDataArray([...scoreDataArray, 0]);
+            setAnswered(true);
+        }
+        if (examData[currentQuestion].optionD !== examData[currentQuestion].correctAnswer && answered) {
+            const newArray = [...scoreDataArray];
+            newArray[currentQuestion] = 0;
+            setScoreDataArray(newArray);
+        }
+        if (examData[currentQuestion].optionD === examData[currentQuestion].correctAnswer && answered) {
+            const newArray = [...scoreDataArray];
+            newArray[currentQuestion] = 10;
+            setScoreDataArray(newArray);
+        }
     }
 
 
@@ -84,30 +107,31 @@ function OptionButton(props: Props) {
         props.setButtonColor(!props.buttonColor);
 
         if (props.buttonA) {
-            optionMapperA();
+            scoreUpdaterA();
             setButtonColorB(false);
             setButtonColorC(false);
             setButtonColorD(false);
         }
         if (props.buttonB) {
-            optionMapperB();
+            scoreUpdaterB();
             setButtonColorA(false);
             setButtonColorC(false);
             setButtonColorD(false);
         }
         if (props.buttonC) {
-            optionMapperC();
+            scoreUpdaterC();
             setButtonColorB(false);
             setButtonColorA(false);
             setButtonColorD(false);
         }
         if (props.buttonD) {
-            optionMapperD();
+            scoreUpdaterD();
             setButtonColorB(false);
             setButtonColorC(false);
             setButtonColorA(false);
         }
 
+        console.log(scoreDataArray);
     }
 
 

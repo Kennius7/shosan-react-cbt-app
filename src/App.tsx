@@ -11,13 +11,6 @@ import { AppContext } from "./context/AppContext";
 
 
 
-// type examUtilTypes = {
-//   id?: number;
-//   answer?: string;
-//   option?: boolean;
-// }
-
-
 function App() {
   const allottedExamTime = 1200;
 
@@ -35,8 +28,6 @@ function App() {
   const [scoreText, setScoreText] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answered, setAnswered] = useState(false);
-  const [checkQuizPage, setCheckQuizPage] = useState(false);
-
   const [scoreDataArray, setScoreDataArray] = React.useState<Array<number>>([]);
 
 
@@ -50,24 +41,12 @@ function App() {
       }
     };
 
-    const checkQuizPageFunct = () => {
-      if (checkQuizPage) {
-        console.log("Logged into the Quiz Page");
-        
-      }
-      if (!checkQuizPage) {
-        console.log("Logged out of the Quiz Page");
-        
-      }
-    }
-
     window.addEventListener("scroll", onScroll);
-    checkQuizPageFunct();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  }, [checkQuizPage]);
+  }, []);
 
 
 
@@ -77,15 +56,14 @@ function App() {
         examTimeLimit, setExamTimeLimit, buttonColorA, setButtonColorA, buttonColorB, setButtonColorB,
         buttonColorC, setButtonColorC, buttonColorD, setButtonColorD, scoreText, setScoreText, 
         currentQuestion, setCurrentQuestion, seconds, setSeconds, minutes, setMinutes, hours, setHours, 
-        answered, setAnswered, checkQuizPage, setCheckQuizPage, allottedExamTime, scoreDataArray, 
+        answered, setAnswered, allottedExamTime, scoreDataArray, 
         setScoreDataArray
       }}>
         <BrowserRouter>
           <div className={`flex flex-col relative w-full`}>
             <div className={`w-full z-[3] ${scrolled
                 ? "bg-primary fixed duration-1000"
-                : "bg-transparent absolute duration-1000"}
-                ${checkQuizPage ? "hidden" : "block"}`}>
+                : "bg-transparent absolute duration-1000"}`}>
               <Navbar />
             </div>
 

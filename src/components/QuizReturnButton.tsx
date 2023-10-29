@@ -11,13 +11,12 @@ export interface Props {
 
 
 function QuizReturnButton(props: Props) {
-    const { setCurrentQuestion, setExamTimeLimit, setCheckQuizPage } = useContext(AppContext);
+    const { setCurrentQuestion, setExamTimeLimit, allottedExamTime } = useContext(AppContext);
     const Navigate = useNavigate();
     
     const buttonLinkFunct = () => {
-      setCheckQuizPage(false);
       setCurrentQuestion(0);
-      setExamTimeLimit(1000);
+      setExamTimeLimit(allottedExamTime);
       Navigate(props.linkVariable);
     }
 

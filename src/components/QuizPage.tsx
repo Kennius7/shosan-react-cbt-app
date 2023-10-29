@@ -24,7 +24,6 @@ function QuizPage() {
     } = useContext(AppContext);
 
     useEffect(() => {
-        console.log(currentQuestion);
         setButtonColorA(false);
         setButtonColorB(false);
         setButtonColorC(false);
