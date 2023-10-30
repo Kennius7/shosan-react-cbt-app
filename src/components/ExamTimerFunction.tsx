@@ -54,7 +54,7 @@ function ExamTimerFunction() {
     return (
         <>
             <div className="flex justify-center items-center text-yellow-600 font-semibold font-poppins 
-                text-[20px]">
+                sm:text-[20px] xs:text-[18px] xxs:text-[15px] text-[13px]">
                 <div>0{hours}</div>:
                 <div className={`${moreThanNineMinutes ? "hidden" : "block"}`}>0</div>
                 <div>{minutes}</div>:

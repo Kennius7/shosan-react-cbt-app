@@ -71,7 +71,8 @@ function Login() {
 
                             <div className="xxs:text-[16px] text-[14px] xxs:tracking-normal tracking-tighter">
                                 Don&apos;t have an account,&nbsp;
-                                <span onClick={()=>Navigate("/register")} 
+                                <span 
+                                    onClick={()=>Navigate("/register")} 
                                     className="text-blue-600 font-semibold cursor-pointer">
                                     sign up here.
                                 </span>

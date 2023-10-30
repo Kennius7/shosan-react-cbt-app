@@ -22,10 +22,11 @@ function ExitExamButton(props: Props) {
 
   return (
     <>
-        <div className="flex justify-center items-center w-full mt-4">
+        <div className="flex justify-center items-center w-full">
             <button 
               type="button" 
-              className="bg-primary text-white w-[30%]" 
+              className="bg-primary text-white xxs:text-[16px] text-[14px] sm:w-[30%] 
+              xs:w-[50%] xxs:w-[80%] w-[70%]" 
               onClick={buttonLinkFunct}>
                 {props.buttonText}
             </button>

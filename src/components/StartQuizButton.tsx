@@ -28,10 +28,11 @@ function StartQuizButton(props: Props) {
 
   return (
     <>
-        <div className="mt-4">
+        <div className="w-full flex justify-end">
             <button 
               type="button" 
-              className="bg-primary text-white w-[150px]" 
+              className="bg-primary text-white md:text-[16px] sm:text-[16px] xs:text-[16px] 
+                text-[13px] md:w-[65%] sm:w-[60%] xs:w-[70%] xxs:w-[80%] w-[80%]" 
               onClick={buttonLinkFunct}>
                 {props.buttonText}
             </button>

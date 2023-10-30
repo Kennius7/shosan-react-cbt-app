@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
-import Navbar from "./components/Navbar";
-import HomePage from "./components/HomePage";
-import QuizPage from "./components/QuizPage";
-import ScorePage from "./components/ScorePage";
-import Register from "./components/Register";
+import { Login, Navbar, HomePage, QuizPage, ScorePage, Register } from "./components";
 import ScrollToTop from "./ScrollToTop";
 import { AppContext } from "./context/AppContext";
 
