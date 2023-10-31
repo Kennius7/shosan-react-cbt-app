@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { auth } from "../../FirebaseConfig";
 import logo from "../assets/Shosan-Acodemia-Logo-small2.png";
 import { AppContext } from "../context/AppContext";
 import ExitExamButton from "./ExitExamButton"
@@ -6,11 +8,15 @@ import { useContext } from 'react';
 
 function ScorePage() {
     const homeLink = "/";
+    // @ts-ignore
+    const studentName = auth.currentUser?.displayName.split(" ")[0];
     const { scoreText } = useContext(AppContext);
 
     const printScore = () => {
         console.log("Print Score");
     }
+
+
 
   return (
     <>
@@ -37,12 +43,12 @@ function ScorePage() {
                     Click on the Print button below to print your score sheet.
                 </div>
 
-                <div className="flex justify-center items-center w-full xs:mb-[100px] xxs:mb-[140px] mb-[80px]">
-                    <div className="text-center font-poppins font-semibold sm:text-[30px] xs:text-[27px] 
-                        xxs:text-[22px] text-[16px]">
-                        Hello Kenny, your score is&nbsp;
+                <div className="flex xs:flex-row flex-col justify-center items-center w-full xs:mb-[100px] xxs:mb-[140px] mb-[80px]">
+                    <div className="text-center font-poppins font-semibold sm:text-[30px] 
+                        xs:text-[27px] xxs:text-[22px] text-[16px]">
+                        Hello {studentName},<br className="xs:hidden block" /> your score is&nbsp;
                     </div>
-                    <div className={`font-poppins font-bold sm:text-[30px] xs:text-[27px] xxs:text-[25px] 
+                    <div className={`font-poppins font-bold sm:text-[30px] xs:text-[27px] xxs:text-[45px] 
                         text-[20px] xxs:ml-0 ml-1
                         ${scoreText < 40 ? "text-red-600" : ""}
                         ${scoreText >= 40 && scoreText < 70 ? "text-yellow-600" : ""}

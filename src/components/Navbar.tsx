@@ -101,24 +101,27 @@ function Navbar() {
 
                     <Link to="/" className="md:w-[65%] w-[70%] flex justify-center items-center">
                         <div className="w-full flex flex-col justify-center items-center">
-                            <div className={`w-full ${scrolled
-                                ? "md:text-[20px] sm:text-[25px] xs:text-[20px] xxs:text-[16px] text-[15px] duration-1000"
-                                : "md:text-[20px] sm:text-[22px] xs:text-[16px] xxs:text-[15px] text-[13px] duration-1000"} 
-                                sm:font-bold font-semibold text-primary w-full flex justify-start items-center`}>
+                            <div className={`w-full md:text-[20px] sm:text-[22px] xs:text-[16px] 
+                                xxs:text-[14px] text-[13px] duration-1000 sm:font-bold font-semibold 
+                                text-primary flex justify-start items-center`}>
                                 Shosan <span className="text-blue-800">&nbsp;Code</span>&nbsp;Hub
                             </div>
                         </div>
                     </Link>
                 </div>
 
-                <div className="flex justify-around items-center px-[10px]">
+                <div className="flex justify-around items-center relative xs:px-[10px] px-[5px]">
                     <div onClick={handleSignOut} 
-                        className={`${currentlyLoggedInUser && currentlyLoggedInUser ? "visible" : "invisible"}
-                        bg-red-200 text-primary text-center rounded-[5px] border-[2px] border-blue-800 
-                        w-[100px] h-[30px] text-[16px] mr-[30px]`}>
+                        className={`${getUserFirstName() !== "Adebayo" 
+                        && currentlyLoggedInUser && currentlyLoggedInUser 
+                        ? "visible" : "invisible"}
+                        bg-red-200 text-slate-600 text-center xs:rounded-[7px] rounded-[5px] 
+                        border-[1px] border-blue-800 xs:w-[100px] xs:h-[30px] w-[70px] h-[20px] 
+                        xs:text-[16px] text-[12px] xs:mr-[30px] mr-[2px] absolute xs:static 
+                        z-2 xs:z-0 top-[110%] xs:top-0`}>
                         Sign out
                     </div>
-                    <div className="flex justify-end items-center pl-[10px]">
+                    <div className="flex justify-end items-center xs:pl-[10px] pl-[5px]">
 
                         {
                             getUserFirstName() !== "Adebayo" ? 
