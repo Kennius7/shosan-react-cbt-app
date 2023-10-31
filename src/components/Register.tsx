@@ -1,16 +1,23 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/Shosan-Acodemia-Logo-small2.png";
 import RegisterButton from "./RegisterButton";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
-//todo Database for user login will be MongoDB
-//! Database for user login will be MongoDB
-//* Database for user login will be MongoDB
-//? Database for user login will be MongoDB
-// Database for user login will be MongoDB
+
+//todo Database for user login was not MongoDB, sorry... Maybe in another project.
+//! Database for user login was not MongoDB, sorry... Maybe in another project.
+//* Database for user login was not MongoDB, sorry... Maybe in another project.
+//? Database for user login was not MongoDB, sorry... Maybe in another project.
+// Database for user login was not MongoDB, sorry... Maybe in another project.
 
 
 function Register() {
     const Navigate = useNavigate();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     return (
         <>
@@ -60,6 +67,8 @@ function Register() {
                                     type="text" 
                                     placeholder="Full Name" 
                                     name="fullName" 
+                                    onChange={(e) => {setName(e.target.value)}} 
+                                    value={name}
                                     className="w-full text-[16px]"/>
                             </div>
                             <div className="xs:mb-2 mb-[15px] w-full">
@@ -67,14 +76,31 @@ function Register() {
                                     type="email" 
                                     placeholder="Email address" 
                                     name="emailForm" 
+                                    onChange={(e) => {setEmail(e.target.value)}} 
+                                    value={email}
                                     className="w-full text-[16px]"/>
                             </div>
-                            <div className="xs:mb-3 mb-[10px] w-full">
+                            <div className="xs:mb-3 mb-[10px] w-full relative">
                                 <input 
-                                    type="password" 
+                                    type={passwordVisible ? "text" : "password"}
                                     placeholder="Password" 
                                     name="passwordForm" 
+                                    onChange={(e) => {setPassword(e.target.value)}} 
+                                    value={password}
                                     className="w-full text-[16px]"/>
+                                {
+                                    passwordVisible 
+                                    ? <span 
+                                        className="cursor-pointer absolute z-[1] right-[2%] top-[20%] opacity-60"
+                                        onClick={() => {setPasswordVisible(!passwordVisible)}}>
+                                        <AiFillEye name="eye" size={24} color="black" />
+                                        </span> 
+                                    : <span 
+                                        className="cursor-pointer absolute z-[1] right-[2%] top-[20%] opacity-60"
+                                        onClick={() => {setPasswordVisible(!passwordVisible)}}>
+                                        <AiFillEyeInvisible name="eye-with-line" size={24} color="black" />
+                                        </span> 
+                                }
                             </div>
 
                             <div className="xxs:text-[16px] text-[14px] xxs:tracking-normal tracking-tighter">
@@ -86,7 +112,7 @@ function Register() {
                             </div>
 
                             <div className="mt-[20px]">
-                                <RegisterButton />
+                                <RegisterButton name={name} email={email} password={password} />
                             </div>
 
                         </form>
@@ -103,3 +129,4 @@ function Register() {
 }
 
 export default Register
+

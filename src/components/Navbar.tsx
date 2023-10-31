@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from "react-router-dom";
-// import { useAuthState } from "react-firebase-hooks/auth";
-// import { signOut } from "firebase/auth";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { auth } from "../../FirebaseConfig";
 import logo from "../assets/Shosan-Acodemia-Logo-small2.png";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 // import { NavContext } from '../context/NavContext';
 
 
@@ -10,32 +13,44 @@ import logo from "../assets/Shosan-Acodemia-Logo-small2.png";
 function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
-    // const { navLinks, active, setActive, toggle, setToggle, blogAdminUid, auth } = useContext(NavContext);
-    // const [currentlyLoggedInUser] = useAuthState(auth);
     // const [user] = useAuthState(auth);
-    // const location = useLocation();
-    // const Navigate = useNavigate();
-    // const displayName = user?.displayName || "a d";
-    // const [initialsVisible, setInitialsVisible] = useState(false);
+    const [currentlyLoggedInUser] = useAuthState(auth);
+    // const [user] = useAuthState(auth);
+    const Navigate = useNavigate();
+    const dashboardName = currentlyLoggedInUser?.displayName;
+    const [initialsVisible, setInitialsVisible] = useState(false);
 
+    const getUserInitials = () => {
+        if (typeof dashboardName !== "string") {
+            console.log(`There was no text for the initials in ${dashboardName}`);
+            return "a d";
+        }
 
-    // const userInitialsFunct = () => {
-    //     setTimeout(() => {
-    //         const firstUserLetter = user?.displayName.split(" ")[0].split("")[0].toUpperCase();
-    //         const secondUserLetter = user?.displayName.split(" ")[1].split("")[0].toUpperCase();
-    //         userInitials = firstUserLetter + secondUserLetter;
-    //         console.log(`The first ${userInitials}`);
-    //         return userInitials;
-    //     }, 0);
-    //     console.log(`Another ${userInitials}`);
-    // }
+        if (typeof dashboardName === "string") {
+            console.log(`There was text for the initials in ${dashboardName}`);
+            const initials = dashboardName.split(" ").map(name => name[0].toUpperCase()).join("");
+            return initials
+        }
+    }
 
-    // const getUserInitials = () => {
-    //     const initials = displayName.split(" ").map(name => name[0].toUpperCase()).join("");
-    //     // console.log(`The user's initials are ${initials}`);
-    //     return initials;
-    // }
+    const getUserFirstName = () => {
+        if (typeof dashboardName !== "string") {
+            console.log(`There was no text for the first name in ${dashboardName}`);
+            return "ade"
+        } 
+        
+        if (typeof dashboardName === "string") {
+            console.log(`There was text for the first name in ${dashboardName}`);
+            const firstName = dashboardName.split(" ")[0];
+            return firstName;
+        }
+    }
 
+    const handleSignOut = () => {
+        Navigate("/");
+        signOut(auth);
+        toast("Successfully signed out", { type: "success" });
+    }
 
     useEffect(() => {
         const onScroll = () => {
@@ -47,19 +62,19 @@ function Navbar() {
         }
 
 
-        // const initialVisibleFunct = () => {
-        //     if (displayName === "a d") {
-        //         setInitialsVisible(true);
-        //     } else {
-        //         setInitialsVisible(false);
-        //     }
-        // }
+        const initialVisibleFunct = () => {
+            if (dashboardName === "a d") {
+                setInitialsVisible(true);
+            } else {
+                setInitialsVisible(false);
+            }
+        }
 
         window.addEventListener("scroll", onScroll);
-        // initialVisibleFunct();
+        initialVisibleFunct();
 
         return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+    }, [dashboardName]);
 
 
     return (
@@ -89,26 +104,40 @@ function Navbar() {
                     </Link>
                 </div>
 
-                <div className="flex justify-end items-center md:w-[350px] sm:w-[400px] xs:w-[40%] w-[220px]">
-
-                    <div className="flex justify-end items-center md:mr-1 xs:mr-3 mr-1">
-                        <div className="font-semibold text-end 
-                            xs:leading-normal leading-[10px] md:text-[16px] sm:text-[17px] xs:text-[13px] 
-                            text-[11px]">
-                            Welcome<br className="xs:hidden block"/> Kenny
-                        </div>
+                <div className="flex justify-around items-center px-[10px]">
+                    <div onClick={handleSignOut} 
+                        className={`${currentlyLoggedInUser && currentlyLoggedInUser ? "visible" : "invisible"}
+                        bg-red-200 text-primary text-center rounded-[5px] border-[2px] border-blue-800 
+                        w-[100px] h-[30px] text-[16px] mr-[30px]`}>
+                        Sign out
                     </div>
+                    <div className="flex justify-end items-center pl-[10px]">
 
-                    <div className={`flex justify-center items-center hover:text-yellow-300 font-bold 
-                        rounded-[50%] duration-500 cursor-pointer bg-text-gradient 
-                        md:mr-3 xs:mr-2 mr-1 md:ml-2 xs:ml-0 ml-1
-                        ${scrolled 
-                        ? "w-[25px] h-[25px] xs:w-[30px] xs:h-[30px] sm:w-[50px] sm:h-[50px] md:w-[28px] md:h-[28px] text-[13px] xs:text-[16px] sm:text-[28px] md:text-[14px]" 
-                        : "w-[26px] h-[26px] xs:w-[30px] xs:h-[30px] sm:w-[40px] sm:h-[40px] md:w-[32px] md:h-[32px] text-[14px] xs:text-[14px] sm:text-[20px] md:text-[16px]"}`}
-                    >
-                        KK
+                        {
+                            currentlyLoggedInUser && currentlyLoggedInUser ? 
+                            <div className="flex justify-center items-center">
+                                <div className="flex justify-end items-center md:mr-1 xs:mr-3 mr-1">
+                                    <div className="font-semibold text-end 
+                                    xs:leading-normal leading-[10px] md:text-[16px] sm:text-[17px] xs:text-[13px] 
+                                    text-[11px]">
+                                    Welcome,<br className="xs:hidden block"/> {getUserFirstName()}
+                                    </div>
+                                </div>
+
+                                <div className={`flex justify-center items-center hover:text-yellow-300 
+                                    font-bold rounded-[50%] duration-500 cursor-pointer bg-text-gradient 
+                                    md:mr-1 xs:mr-2 mr-1 md:ml-2 xs:ml-0 ml-1
+                                    ${initialsVisible ? "opacity-30 text-blue-500" : "text-primary"}
+                                    ${scrolled 
+                                    ? "w-[25px] h-[25px] xs:w-[30px] xs:h-[30px] sm:w-[50px] sm:h-[50px] md:w-[28px] md:h-[28px] text-[13px] xs:text-[16px] sm:text-[28px] md:text-[14px]" 
+                                    : "w-[26px] h-[26px] xs:w-[30px] xs:h-[30px] sm:w-[40px] sm:h-[40px] md:w-[32px] md:h-[32px] text-[14px] xs:text-[14px] sm:text-[20px] md:text-[16px]"}`}
+                                >
+                                    {getUserInitials()}
+                                </div>
+                            </div> : null
+                        }
+
                     </div>
-
                 </div>
 
             </nav>
