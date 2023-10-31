@@ -15,6 +15,24 @@ type Props = {
 function LoginButton(props: Props) {
     const Navigate = useNavigate();
     const [loginText, setLoginText] = useState("Sign in");
+    const toastNetworkError = "auth/network-request-failed";
+    const toastLoginError1 = "auth/invalid-email";
+    const toastLoginError2 = "Firebase: Error(auth/invalid-email)";
+    const appNetworkErrorText = "There was a network error. Check your network.";
+    const appLoginErrorText = "Your login credentials are incorrect.";
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const toastErrorMessageFunction = (error: any) => {
+      if (error.code === toastNetworkError) {
+        return appNetworkErrorText;
+      }
+      if (error.code === toastLoginError1) {
+        return appLoginErrorText;
+      }
+      if (error.message === toastLoginError2) {
+        return appLoginErrorText;
+      }
+      else return "Unknown error."
+    }
 
 
     const handleLogIn = async () => {
@@ -35,7 +53,7 @@ function LoginButton(props: Props) {
         }, 3500);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
-        toast(`${error.code}. Either your email or password is incorrect. Check them or Sign up.`, { type: "error" })
+        toast(`${toastErrorMessageFunction(error)}`, { type: "error" })
       }
     }
 

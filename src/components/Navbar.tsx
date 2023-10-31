@@ -17,18 +17,18 @@ function Navbar() {
     const [currentlyLoggedInUser] = useAuthState(auth);
     // const [user] = useAuthState(auth);
     const Navigate = useNavigate();
-    const dashboardName = currentlyLoggedInUser?.displayName;
+    const dashboardName = auth.currentUser?.displayName;
     const [initialsVisible, setInitialsVisible] = useState(false);
 
     const getUserInitials = () => {
         if (typeof dashboardName !== "string") {
             console.log(`There was no text for the initials in ${dashboardName}`);
-            return "a d";
+            return "AD";
         }
 
         if (typeof dashboardName === "string") {
             console.log(`There was text for the initials in ${dashboardName}`);
-            const initials = dashboardName.split(" ").map(name => name[0].toUpperCase()).join("");
+            const initials = dashboardName.split(" ").map(name => name[0]).join("");
             return initials
         }
     }
@@ -36,20 +36,27 @@ function Navbar() {
     const getUserFirstName = () => {
         if (typeof dashboardName !== "string") {
             console.log(`There was no text for the first name in ${dashboardName}`);
-            return "ade"
+            return "Adebayo"
         } 
         
         if (typeof dashboardName === "string") {
             console.log(`There was text for the first name in ${dashboardName}`);
+            console.log(auth.currentUser?.displayName);
             const firstName = dashboardName.split(" ")[0];
             return firstName;
         }
     }
 
     const handleSignOut = () => {
-        Navigate("/");
-        signOut(auth);
-        toast("Successfully signed out", { type: "success" });
+        signOut(auth)
+        .then(()=>{
+            Navigate("/");
+            toast("Successfully signed out", { type: "success" });
+            console.log(auth.currentUser);
+        }).catch((error) => {
+            toast(error.code, { type: "error" });
+            toast(error.message, { type: "error" });
+        });
     }
 
     useEffect(() => {
@@ -114,7 +121,7 @@ function Navbar() {
                     <div className="flex justify-end items-center pl-[10px]">
 
                         {
-                            currentlyLoggedInUser && currentlyLoggedInUser ? 
+                            getUserFirstName() !== "Adebayo" ? 
                             <div className="flex justify-center items-center">
                                 <div className="flex justify-end items-center md:mr-1 xs:mr-3 mr-1">
                                     <div className="font-semibold text-end 

@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../FirebaseConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,7 +23,9 @@ function RegisterButton(props: Props) {
     const upperCaseRegex = /[A-Z]/;
     const lowerCaseRegex = /[a-z]/;
     const numberRegex = /[0-9]/;
-    const specialCharRegex = /[!@#$%^&]/
+    const specialCharRegex = /[!@#$%^&]/;
+    const toastNetworkError = "auth/network-request-failed";
+    const appNetworkErrorText = "There was a network error. Check your network.";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const validatePassword = (regex: any, password: string) => {
@@ -36,6 +39,13 @@ function RegisterButton(props: Props) {
       }, 3000);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const toastErrorMessageFunction = (error: any) => {
+    if (error.code === toastNetworkError) {
+      return appNetworkErrorText;
+    }
+    else return "Unknown error."
+  }
 
     const handleRegister = async () => {
       // Navigate("/");
@@ -75,19 +85,20 @@ function RegisterButton(props: Props) {
 
       try {
           await createUserWithEmailAndPassword(auth, props.email, props.password);
+          signInWithEmailAndPassword(auth, props.email, props.password);
+          // @ts-ignore
           updateProfile(auth.currentUser, { displayName: props.name });
           setTimeout(() => {
               setSignUpText("Sign Up");
               toast("Sign up successful", { type: "success" });
           }, 3000);
           setTimeout(() => {
-              Navigate("/");
+              Navigate("/home");
           }, 3500);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
-          toast(error.code, { type: "error" });
-          toast(error.message, { type: "error" });
+          toast(`${toastErrorMessageFunction(error)}`, { type: "error" });
           SignUpTimeOut();
       }
     }
