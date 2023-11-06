@@ -3,24 +3,82 @@ import { auth } from "../../FirebaseConfig";
 import logo from "../assets/Shosan-Acodemia-Logo-small2.png";
 import { AppContext } from "../context/AppContext";
 import ExitExamButton from "./ExitExamButton"
-import { useContext } from 'react';
+import { useContext, useRef, useState } from 'react';
+import html2canvas from 'html2canvas';
+
 
 
 function ScorePage() {
     const homeLink = "/";
+    const captureRef = useRef(null);
     // @ts-ignore
     const studentName = auth.currentUser?.displayName.split(" ")[0];
     const { scoreText } = useContext(AppContext);
+    // const [attachment, setAttachment] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
 
-    const printScore = () => {
-        console.log("Print Score");
+    const to = auth.currentUser?.email;
+    const subject = "TEST SCORE PRINTOUT";
+    // const text = `Here is a printout of your test score, ${studentName}. You scored ${scoreText}/100. Try again next time` 
+
+
+
+
+    const printScore = async () => {
+        if (captureRef.current) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            html2canvas(captureRef.current).then((canvas: any) => {
+                const screenshotData = canvas.toDataURL("image/png");
+                // Create an anchor element to download the image
+                const a = document.createElement('a');
+                a.href = screenshotData;
+                a.download = 'screenshot.png';
+                setImageUrl(()=>screenshotData);
+                a.click();
+            })
+
+            // Create an HTML email with the embedded image
+            const htmlEmail = `
+            <html>
+                <body>
+                <p>Here is a printout of your test score, ${studentName}. You scored ${scoreText}/100. Try again next time</p>
+                <img src="${imageUrl}" alt="Embedded Score Image" />
+                </body>
+            </html>
+            `;
+
+            const formData = new FormData();
+            // @ts-ignore
+            formData.append('to', to);
+            formData.append('subject', subject);
+            // formData.append('text', text);
+            // formData.append('attachment', attachment);
+            formData.append('html', htmlEmail);
+
+            try {
+                const response = await fetch('http://localhost:3001/send-email', {
+                  method: 'POST',
+                  body: formData,
+                });
+          
+                if (response.ok) {
+                  console.log('Email sent successfully');
+                //   console.log(htmlEmail);
+                } else {
+                  console.error('Email sending failed');
+                }
+              } catch (error) {
+                console.error('An error occurred:', error);
+              }
+        }
     }
 
 
 
   return (
     <>
-        <div className="relative flex justify-center items-center overflow-hidden w-full h-[100vh]">
+        <div ref={captureRef} 
+            className="relative flex justify-center items-center overflow-hidden w-full h-[100vh]">
             <div className="flex justify-start items-center overflow-hidden w-full 
                 md:mt-0 sm:-mt-[200px] xs:mt-0 xxs:-mt-[27%] -mt-[10%]">
 
@@ -43,17 +101,18 @@ function ScorePage() {
                     Click on the Print button below to print your score sheet.
                 </div>
 
-                <div className="flex xs:flex-row flex-col justify-center items-center w-full xs:mb-[100px] xxs:mb-[140px] mb-[80px]">
+                <div className="flex xs:flex-row flex-col justify-center items-center w-full xs:mb-[100px] 
+                    xxs:mb-[140px] mb-[80px]">
                     <div className="text-center font-poppins font-semibold sm:text-[30px] 
                         xs:text-[27px] xxs:text-[22px] text-[16px]">
                         Hello {studentName},<br className="xs:hidden block" /> your score is&nbsp;
                     </div>
-                    <div className={`font-poppins font-bold sm:text-[30px] xs:text-[27px] xxs:text-[45px] 
-                        text-[20px] xxs:ml-0 ml-1
-                        ${scoreText < 40 ? "text-red-600" : ""}
+                    <div className={`font-poppins font-bold flex justify-center items-center 
+                        sm:text-[30px] xs:text-[27px] xxs:text-[45px] text-[20px] xxs:ml-0 ml-1
+                        ${scoreText <= 39 ? "text-red-600" : ""}
                         ${scoreText >= 40 && scoreText < 70 ? "text-yellow-600" : ""}
                         ${scoreText >= 70 ? "text-blue-600" : ""}`}>
-                        {scoreText}
+                        {scoreText}<span className="text-black">/100</span>
                     </div>
                 </div>
 

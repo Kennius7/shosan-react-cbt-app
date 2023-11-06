@@ -22,12 +22,12 @@ function Navbar() {
 
     const getUserInitials = () => {
         if (typeof dashboardName !== "string") {
-            console.log(`There was no text for the initials in ${dashboardName}`);
+            // console.log(`There was no text for the initials in ${dashboardName}`);
             return "AD";
         }
 
         if (typeof dashboardName === "string") {
-            console.log(`There was text for the initials in ${dashboardName}`);
+            // console.log(`There was text for the initials in ${dashboardName}`);
             const initials = dashboardName.split(" ").map(name => name[0]).join("");
             return initials
         }
@@ -35,13 +35,13 @@ function Navbar() {
 
     const getUserFirstName = () => {
         if (typeof dashboardName !== "string") {
-            console.log(`There was no text for the first name in ${dashboardName}`);
+            // console.log(`There was no text for the first name in ${dashboardName}`);
             return "Adebayo"
         } 
         
         if (typeof dashboardName === "string") {
-            console.log(`There was text for the first name in ${dashboardName}`);
-            console.log(auth.currentUser?.displayName);
+            // console.log(`There was text for the first name in ${dashboardName}`);
+            // console.log(auth.currentUser?.displayName);
             const firstName = dashboardName.split(" ")[0];
             return firstName;
         }
