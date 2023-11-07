@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas';
 
 
 function ScorePage() {
+    const apiUrl = "https://shosan-computer-based-test.netlify.app/.netlify/functions/api/send-email";
     const homeLink = "/";
     const captureRef = useRef(null);
     // @ts-ignore
@@ -56,7 +57,7 @@ function ScorePage() {
             formData.append('html', htmlEmail);
 
             try {
-                const response = await fetch('https://shosan-computer-based-test.netlify.app/.netlify/functions/api/send-email', {
+                const response = await fetch(apiUrl, {
                   method: 'POST',
                   body: formData,
                 });

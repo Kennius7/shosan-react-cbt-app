@@ -52,7 +52,7 @@ router.post('/send-email', upload.single('attachment'), (req, res) => {
     const { to, subject, html } = req.body;
 
     const mailOptions = {
-      from: 'Shosan Code Hub',
+      from: 'shosanacodemia@gmail.com',
       to,
       subject,
       html,
