@@ -56,7 +56,7 @@ function ScorePage() {
             formData.append('html', htmlEmail);
 
             try {
-                const response = await fetch('http://localhost:3001/send-email', {
+                const response = await fetch('https://shosan-computer-based-test.netlify.app/.netlify/functions/api/send-email', {
                   method: 'POST',
                   body: formData,
                 });
