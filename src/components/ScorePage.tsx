@@ -11,22 +11,26 @@ import html2canvas from 'html2canvas';
 function ScorePage() {
     const apiUrl = "https://shosan-computer-based-test.netlify.app/.netlify/functions/api/send-email";
     const homeLink = "/";
+    const checkResultEmail = "ogbogukenny@yahoo.com";
+    const to = auth.currentUser?.email;
     const captureRef = useRef(null);
     // @ts-ignore
     const studentName = auth.currentUser?.displayName.split(" ")[0];
     const { scoreText } = useContext(AppContext);
-    // const [attachment, setAttachment] = useState("");
     const [imageUrl, setImageUrl] = useState("");
-
-    const to = auth.currentUser?.email;
+    const [printButtonText, setPrintButtonText] = useState("Print Test Score");
+    const [mailto, setMailto] = useState<Array<string>>([]);
+    
     const subject = "TEST SCORE PRINTOUT";
-    // const text = `Here is a printout of your test score, ${studentName}. You scored ${scoreText}/100. Try again next time` 
-
-
 
 
     const printScore = async () => {
+        setPrintButtonText("Printing...");
         if (captureRef.current) {
+            if (to === checkResultEmail) {
+                setMailto([to]);
+                // @ts-ignore
+            } else { setMailto([checkResultEmail, to]) }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             html2canvas(captureRef.current).then((canvas: any) => {
                 const screenshotData = canvas.toDataURL("image/png");
@@ -36,6 +40,8 @@ function ScorePage() {
                 a.download = 'screenshot.png';
                 setImageUrl(()=>screenshotData);
                 a.click();
+                setTimeout(() => setPrintButtonText("Printout Saved Locally"), 1000);
+                setTimeout(() => setPrintButtonText("Printing..."), 3000);
             })
 
             // Create an HTML email with the embedded image
@@ -50,7 +56,7 @@ function ScorePage() {
 
             const formData = new FormData();
             // @ts-ignore
-            formData.append('to', to);
+            formData.append('to', mailto);
             formData.append('subject', subject);
             // formData.append('text', text);
             // formData.append('attachment', attachment);
@@ -64,13 +70,21 @@ function ScorePage() {
           
                 if (response.ok) {
                   console.log('Email sent successfully');
+                  setPrintButtonText("Print Sent to Email");
+                  setTimeout(() => setPrintButtonText("Print Test Score"), 5000);
                 //   console.log(htmlEmail);
                 } else {
                   console.error('Email sending failed');
+                  setPrintButtonText("Print to Email Failed");
+                  setTimeout(() => setPrintButtonText("Click Here Again"), 3000);
+                  setTimeout(() => setPrintButtonText("Print Test Score"), 7000);
                 }
-              } catch (error) {
+            } catch (error) {
                 console.error('An error occurred:', error);
-              }
+                setPrintButtonText("Print Error");
+                setTimeout(() => setPrintButtonText("Click Here Again"), 3000);
+                setTimeout(() => setPrintButtonText("Print Test Score"), 7000);
+            }
         }
     }
 
@@ -123,7 +137,7 @@ function ScorePage() {
                         onClick={printScore} 
                         className="bg-blue-gradient2 text-white xxs:text-[16px] text-[14px] 
                         sm:w-[30%] xs:w-[50%] xxs:w-[80%] w-[70%]">
-                        PRINT EXAM SCORE
+                        {printButtonText}
                     </button>
                 </div>
 
